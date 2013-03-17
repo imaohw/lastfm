@@ -1,0 +1,22 @@
+#!/usr/bin/env perl 
+
+use strict;
+use warnings;
+use utf8;
+
+use Net::LastFMAPI;
+
+my $format = $ARGV[0] || "%ARTIST%(%ALBUM%) - %TITLE%";
+
+my $res = lastfm('user.getRecentTracks', user => 'kart0ffelsack', limit => '1');
+
+if(ref($res->{recenttracks}->{track}) eq "ARRAY") {
+    my $track = $res->{recenttracks}->{track}[0];
+    
+    $format =~ s/%ARTIST%/$track->{artist}->{'#text'}/g;
+    $format =~ s/%ALBUM%/$track->{album}->{'#text'}/g;
+    $format =~ s/%TITLE%/$track->{name}/g;
+
+    print "$format\n";
+}
+

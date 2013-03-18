@@ -1,0 +1,7 @@
+now_playing [FORMAT]
+    Default FORMAT: "%ARTIST%(%ALBUM%) - %TITLE%"
+    
+    Available variables:
+        %ARTIST%
+        %ALBUM%
+        %TITLE%

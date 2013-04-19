@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use utf8;
 
+use Encode;
 use Net::LastFMAPI;
 
 my $format = $ARGV[0] || "%ARTIST%(%ALBUM%) - %TITLE%";
@@ -17,6 +18,6 @@ if(ref($res->{recenttracks}->{track}) eq "ARRAY") {
     $format =~ s/%ALBUM%/$track->{album}->{'#text'}/g;
     $format =~ s/%TITLE%/$track->{name}/g;
 
-    print "$format\n";
+    print Encode::encode("utf8",$format) . "\n";
 }
 
